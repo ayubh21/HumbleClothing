@@ -4,3 +4,7 @@ declare namespace NodeJS {
     PORT: Number;
   }
 }
+
+type Orders = {
+  status: boolean;
+};

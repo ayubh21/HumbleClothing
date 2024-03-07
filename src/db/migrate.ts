@@ -1,14 +1,18 @@
 // connection to postgres database
-//
 import { Pool } from "pg";
 import { drizzle } from "drizzle-orm/node-postgres";
 import "dotenv/config";
-import { migrate } from "drizzle-orm/better-sqlite3/migrator";
+import { migrate } from "drizzle-orm/node-postgres/migrator";
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
+  // host: "127.0.0.1",
+  // port: 5432,
+  // user: "postgres",
+  // password: "tusay101",
+  // database: "postgres",
 });
-
+console.log(process.env.DATABASE_URL);
 // connect drizzle to postgres database
 
 const db = drizzle(pool);
