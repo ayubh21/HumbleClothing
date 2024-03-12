@@ -1,4 +1,5 @@
 import {
+  sql,
   date,
   serial,
   text,
@@ -33,7 +34,7 @@ export const products = pgTable("products", {
     precision: 100,
     scale: 20,
   }).notNull(),
-  createdAt: timestamp("created_at"),
+  createdAt: timestamp("created_at").defaultNow(),
   categoryId: serial("category_id").references(() => category.categoryId),
   inventoryId: serial("inventory_id").references(() => inventory.inventoryId),
   productImage: varchar("product_image"),
@@ -50,7 +51,7 @@ export const category = pgTable("category", {
 export const inventory = pgTable("inventory", {
   inventoryId: integer("inventory_id").primaryKey().notNull(),
   quantity: integer("quantity").notNull(),
-  createdAt: timestamp("created_at"),
+  createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at"),
 });
 
@@ -61,7 +62,7 @@ export const cart = pgTable("cart", {
     .references(() => products.product_id)
     .notNull(),
   quantity: integer("quanitity").notNull(),
-  createdAt: timestamp("created_at"),
+  createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at"),
 });
 
@@ -79,7 +80,7 @@ export const order = pgTable("order", {
   orderDetailsId: integer("order_detail_id")
     .references(() => orderDetails.orderDetailsId)
     .notNull(),
-  createdAt: timestamp("created_at"),
+  createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at"),
 });
 
@@ -88,12 +89,12 @@ export const orderDetails = pgTable("order_details", {
   orderDetailsId: integer("order_detail_id").primaryKey().notNull(),
   total: numeric("total", { precision: 100, scale: 20 }),
   paymentId: integer("payment_id").references(() => paymentDetail.paymentId),
-  createdAt: timestamp("created_at"),
+  createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at"),
 });
 
 export const paymentDetail = pgTable("payment_detail", {
   paymentId: integer("payment_id").primaryKey().notNull(),
-  createdAt: timestamp("created_at"),
+  createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at"),
 });
