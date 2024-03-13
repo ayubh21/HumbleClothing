@@ -2,36 +2,40 @@
 
 export const products = [
   {
-    productDescription: "Men's Blue Denim Jeans",
-    sku: "MEN-JEANS-BLU",
+    productDescription: "Qamis Qabail Qc Subtile white",
+    sku: "QAMIS-WHITE",
     price: 49.99,
     categoryId: 1,
     inventoryId: 1,
-    productImage: "mens-jeans-blue.jpg",
+    productImage:
+      "https://sounnahstore.com/10241-large_default/qamis-qabail-qc-subtil-.jpg",
   },
   {
-    productDescription: "Women's Black Leather Jacket",
-    sku: "WOMEN-JACKET-BLK",
-    price: 129.99,
+    productDescription: "Qamis Qabail Qc Subtile Black and Purple",
+    sku: "QAMIS-BLACK-PURPLE",
+    price: 49.99,
     categoryId: 2,
     inventoryId: 2,
-    productImage: "womens-jacket-black.jpg",
+    productImage:
+      "https://sounnahstore.com/10236-large_default/qamis-qabail-qc-subtil-.jpg",
   },
   {
-    productDescription: "Men's White Polo Shirt",
-    sku: "MEN-POLO-WHT",
+    productDescription: "QAMIS EMBROIDERED QABAIL SHAM TAUPE",
+    sku: "DN-015",
     price: 29.99,
     categoryId: 1,
     inventoryId: 3,
-    productImage: "mens-polo-white.jpg",
+    productImage:
+      "https://sounnahstore.com/9588-large_default/qamis-embroidered-qabail-sham-taupe.jpg",
   },
   {
-    productDescription: "Women's Floral Summer Dress",
+    productDescription: "QAMIS EMBROIDERED QABAIL SHAM MIDNIGHT BLUE",
     sku: "WOMEN-DRESS-FLR",
     price: 39.99,
     categoryId: 2,
     inventoryId: 4,
-    productImage: "womens-dress-floral.jpg",
+    productImage:
+      "https://sounnahstore.com/9575-large_default/qamis-embroidered-qabail-sham-midnight-blue.jpg",
   },
   // Add more sample products as needed
 ];
