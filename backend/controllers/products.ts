@@ -14,7 +14,7 @@ export const products = [
     productDescription: "Qamis Qabail Qc Subtile Black and Purple",
     sku: "QAMIS-BLACK-PURPLE",
     price: 49.99,
-    categoryId: 2,
+    categoryId: 1,
     inventoryId: 2,
     productImage:
       "https://sounnahstore.com/10236-large_default/qamis-qabail-qc-subtil-.jpg",
@@ -30,9 +30,9 @@ export const products = [
   },
   {
     productDescription: "QAMIS EMBROIDERED QABAIL SHAM MIDNIGHT BLUE",
-    sku: "WOMEN-DRESS-FLR",
+    sku: "DN-016",
     price: 39.99,
-    categoryId: 2,
+    categoryId: 1,
     inventoryId: 4,
     productImage:
       "https://sounnahstore.com/9575-large_default/qamis-embroidered-qabail-sham-midnight-blue.jpg",
