@@ -1,6 +1,14 @@
-// Projects
+// Products
+import { Error } from "postgres";
+import { db } from "../db/database.ts";
+import { products } from "../db/schema";
+import { Product, Products } from "../models/models.ts";
+import { sql } from 'drizzle-orm'
+import { DatabaseError } from "pg";
+import { real } from "drizzle-orm/mysql-core/index";
 
-export const products = [
+
+export const product = [
   {
     productDescription: "Qamis Qabail Qc Subtile white",
     sku: "QAMIS-WHITE",
@@ -39,3 +47,25 @@ export const products = [
   },
   // Add more sample products as needed
 ];
+
+// CRUD
+const addProduct(id: serial): Product {
+  try {
+
+    for (let i = 0; i < product.length; i++) {
+      await db.insert(products).values({ productDescription: product[i].productDescription, sku: product[i].sku, price: product[i].price, categoryId: product[i].categoryId, inventoryId: product[i].inventoryId, productImage: product[i].productImage }
+      ).then(`where`)
+    })
+  }
+
+  }.catch ((err) => {
+  if (err instanceof DatabaseError) {
+    console.log(err.message)
+  }
+}
+}
+
+
+
+
+

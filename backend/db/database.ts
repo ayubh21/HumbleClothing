@@ -1,6 +1,7 @@
 // global client
 // create db func to handle connections to database
 
+import { drizzle } from "drizzle-orm/node-postgres";
 import { Client } from "pg";
 
 const client = new Client({
@@ -8,4 +9,6 @@ const client = new Client({
     "postgresql://postgres:tusay101@localhost:5432/postgres?schema=public",
 });
 
-const db = function queryClient(db: Client): Client {};
+await client.connect();
+
+export const db = drizzle(client);
