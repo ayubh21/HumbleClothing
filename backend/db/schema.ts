@@ -1,5 +1,4 @@
 import {
-  sql,
   date,
   serial,
   text,
@@ -29,11 +28,8 @@ export const customer = pgTable("user", {
 export const products = pgTable("products", {
   product_id: serial("id").primaryKey().notNull(),
   productDescription: text("desc").notNull(),
-  sku: varchar("sku", { length: 10 }).notNull(),
-  price: numeric("price", {
-    precision: 100,
-    scale: 20,
-  }).notNull(),
+  sku: varchar("sku", { length: 20 }).notNull(),
+  price: numeric("price", { precision: 100, scale: 20 }).notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   categoryId: serial("category_id").references(() => category.categoryId),
   inventoryId: serial("inventory_id").references(() => inventory.inventoryId),

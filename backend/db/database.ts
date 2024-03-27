@@ -9,6 +9,6 @@ const client = new Client({
     "postgresql://postgres:tusay101@localhost:5432/postgres?schema=public",
 });
 
-await client.connect();
+client.connect();
 
 export const db = drizzle(client);

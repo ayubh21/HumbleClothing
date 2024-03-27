@@ -1,18 +1,17 @@
 // Products
-import { Error } from "postgres";
-import { db } from "../db/database.ts";
+// import { Error } from "postgres";
+import { db } from "../db/database";
 import { products } from "../db/schema";
-import { Product, Products } from "../models/models.ts";
-import { sql } from 'drizzle-orm'
-import { DatabaseError } from "pg";
-import { real } from "drizzle-orm/mysql-core/index";
-
+// import { Product } from "../models/models.ts";
+// import { sql } from "drizzle-orm";
+// import { DatabaseError } from "pg";
+// import { real } from "drizzle-orm/mysql-core/index";
 
 export const product = [
   {
     productDescription: "Qamis Qabail Qc Subtile white",
     sku: "QAMIS-WHITE",
-    price: 49.99,
+    price: "49.99",
     categoryId: 1,
     inventoryId: 1,
     productImage:
@@ -21,7 +20,7 @@ export const product = [
   {
     productDescription: "Qamis Qabail Qc Subtile Black and Purple",
     sku: "QAMIS-BLACK-PURPLE",
-    price: 49.99,
+    price: "40.00",
     categoryId: 1,
     inventoryId: 2,
     productImage:
@@ -30,7 +29,7 @@ export const product = [
   {
     productDescription: "QAMIS EMBROIDERED QABAIL SHAM TAUPE",
     sku: "DN-015",
-    price: 29.99,
+    price: "48.33",
     categoryId: 1,
     inventoryId: 3,
     productImage:
@@ -39,7 +38,7 @@ export const product = [
   {
     productDescription: "QAMIS EMBROIDERED QABAIL SHAM MIDNIGHT BLUE",
     sku: "DN-016",
-    price: 39.99,
+    price: "49.99",
     categoryId: 1,
     inventoryId: 4,
     productImage:
@@ -49,23 +48,25 @@ export const product = [
 ];
 
 // CRUD
-const addProduct(id: serial): Product {
+
+const addProduct = async () => {
+  // pass in Pg datatype
   try {
-
     for (let i = 0; i < product.length; i++) {
-      await db.insert(products).values({ productDescription: product[i].productDescription, sku: product[i].sku, price: product[i].price, categoryId: product[i].categoryId, inventoryId: product[i].inventoryId, productImage: product[i].productImage }
-      ).then(`where`)
-    })
+      console.log(product[i]);
+      await db.insert(products).values({
+        productDescription: product[i].productDescription,
+        sku: product[i].sku,
+        price: product[i].price,
+        categoryId: product[i].categoryId,
+        inventoryId: product[i].inventoryId,
+        productImage: product[i].productImage,
+      });
+    }
+  } catch (err) {
+    // check to see if row has been added if it hasnt then throw error
+    console.log("No product provided", err);
   }
+};
 
-  }.catch ((err) => {
-  if (err instanceof DatabaseError) {
-    console.log(err.message)
-  }
-}
-}
-
-
-
-
-
+addProduct();
