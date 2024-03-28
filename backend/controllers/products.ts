@@ -22,7 +22,7 @@ export const product = [
     sku: "QAMIS-BLACK-PURPLE",
     price: "40.00",
     categoryId: 1,
-    inventoryId: 2,
+    inventoryId: 1,
     productImage:
       "https://sounnahstore.com/10236-large_default/qamis-qabail-qc-subtil-.jpg",
   },
@@ -31,7 +31,7 @@ export const product = [
     sku: "DN-015",
     price: "48.33",
     categoryId: 1,
-    inventoryId: 3,
+    inventoryId: 1,
     productImage:
       "https://sounnahstore.com/9588-large_default/qamis-embroidered-qabail-sham-taupe.jpg",
   },
@@ -40,7 +40,7 @@ export const product = [
     sku: "DN-016",
     price: "49.99",
     categoryId: 1,
-    inventoryId: 4,
+    inventoryId: 1,
     productImage:
       "https://sounnahstore.com/9575-large_default/qamis-embroidered-qabail-sham-midnight-blue.jpg",
   },
@@ -69,7 +69,7 @@ const addProduct = async () => {
   }
 };
 
-const getProducts = async (id: number) => {
+export const getProducts = async (id: number) => {
   const rowId = await db.query.products.findFirst({
     where: eq(products.product_id, id),
   });
@@ -81,4 +81,26 @@ const getProducts = async (id: number) => {
   return rowId;
 };
 
-getProducts(2);
+export const updateProduct = async (id: number, product: Product) => {
+  const updatedRow = await db
+    .update(products)
+    .set({
+      productDescription: product.productDescription,
+      sku: product.sku,
+      price: product.price.toString(),
+      productImage: product.productImage,
+    })
+    .where(eq(products.product_id, id))
+    .returning();
+  console.log(updatedRow);
+  return updatedRow;
+};
+
+let productObj: Product = {
+  productDescription: "this is a t shirt",
+  sku: "59-340",
+  price: 49.99,
+  productImage: "https://picsum.photos/200/300",
+};
+
+updateProduct(2, productObj);

@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS "products" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"desc" text NOT NULL,
 	"sku" varchar(10) NOT NULL,
-	"price" numeric(100, 20) NOT NULL,
+	"price" numeric(5, 2) NOT NULL,
 	"created_at" timestamp,
 	"category_id" serial NOT NULL,
 	"inventory_id" serial NOT NULL,
