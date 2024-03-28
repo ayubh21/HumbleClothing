@@ -1,11 +1,8 @@
 // Products
-// import { Error } from "postgres";
 import { db } from "../db/database";
 import { products } from "../db/schema";
 import { Product } from "../models/models";
-import { eq, sql } from "drizzle-orm";
-// import { DatabaseError } from "pg";
-// import { real } from "drizzle-orm/mysql-core/index";
+import { eq, exists, sql } from "drizzle-orm";
 
 export const product = [
   {
@@ -49,7 +46,7 @@ export const product = [
 
 // CRUD
 
-const addProduct = async () => {
+export const addProduct = async () => {
   // pass in Pg datatype
   try {
     for (let i = 0; i < product.length; i++) {
@@ -64,7 +61,6 @@ const addProduct = async () => {
       });
     }
   } catch (DatabaseError) {
-    // check to see if row has been added if it hasnt then throw error
     console.log("No product provided", DatabaseError);
   }
 };
@@ -96,11 +92,10 @@ export const updateProduct = async (id: number, product: Product) => {
   return updatedRow;
 };
 
-let productObj: Product = {
-  productDescription: "this is a t shirt",
-  sku: "59-340",
-  price: 49.99,
-  productImage: "https://picsum.photos/200/300",
-};
-
-updateProduct(2, productObj);
+export async function deleteProduct(id: number) {
+  try {
+    await db.delete(products).where(eq(products.product_id, id));
+  } catch (err) {
+    console.log("delete failed");
+  }
+}
