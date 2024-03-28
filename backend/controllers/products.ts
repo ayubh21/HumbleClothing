@@ -2,8 +2,8 @@
 // import { Error } from "postgres";
 import { db } from "../db/database";
 import { products } from "../db/schema";
-// import { Product } from "../models/models.ts";
-// import { sql } from "drizzle-orm";
+import { Product } from "../models/models";
+import { eq, sql } from "drizzle-orm";
 // import { DatabaseError } from "pg";
 // import { real } from "drizzle-orm/mysql-core/index";
 
@@ -63,10 +63,22 @@ const addProduct = async () => {
         productImage: product[i].productImage,
       });
     }
-  } catch (err) {
+  } catch (DatabaseError) {
     // check to see if row has been added if it hasnt then throw error
-    console.log("No product provided", err);
+    console.log("No product provided", DatabaseError);
   }
 };
 
-addProduct();
+const getProducts = async (id: number) => {
+  const rowId = await db.query.products.findFirst({
+    where: eq(products.product_id, id),
+  });
+  if (rowId == null) {
+    console.log("product id does not exist");
+  }
+
+  console.log(rowId);
+  return rowId;
+};
+
+getProducts(2);
