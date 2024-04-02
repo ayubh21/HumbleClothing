@@ -22,23 +22,20 @@ export const getAllProducts = async (req: Request, res: Response) => {
 export const createProduct = async (req: Request, res: Response) => {
   const { body } = req;
 
-  if (body.productDescription == null) {
-    return res.status(400).json({
-      msg: "ProductDescription cannot be null",
-    });
-  }
-
   try {
     const p: Product = {
-      productDescription: body.productDesciption,
+      productDescription: body.productDescription,
       sku: body.sku,
       productImage: body.productImage,
       price: body.price,
+      categoryId: body.categoryId,
+      inventoryId: body.InventoryId,
     };
-
+    // console.log(p);
     await addProduct(p);
-    res.send(body);
+    res.send(p);
   } catch (err) {
     console.log(err);
+    return res.send(400);
   }
 };

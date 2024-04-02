@@ -1,3 +1,4 @@
+import { int } from "drizzle-orm/mysql-core";
 import {
   date,
   serial,
@@ -31,14 +32,14 @@ export const products = pgTable("products", {
   sku: varchar("sku", { length: 20 }).notNull(),
   price: numeric("price", { precision: 4, scale: 2 }).notNull(),
   createdAt: timestamp("created_at").defaultNow(),
-  categoryId: serial("category_id").references(() => category.categoryId),
+  categoryId: integer("category_id").references(() => category.categoryId),
   inventoryId: serial("inventory_id").references(() => inventory.inventoryId),
   productImage: varchar("product_image"),
 });
 
 //category
 export const category = pgTable("category", {
-  categoryId: serial("category_id").primaryKey().notNull(),
+  categoryId: integer("category_id").primaryKey().notNull(),
   name: varchar("name", { length: 10 }).notNull(),
   categoryDescription: text("desc").notNull(),
 });

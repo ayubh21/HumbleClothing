@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node services/server.ts",
-    "generate": "drizzle-kit generate:pg --schema= db/schema.ts",
+    "generate": "drizzle-kit generate:pg schema=db/schema.ts",
     "migration-push": "node -r esbuild-register db/migrate.ts"
   },
   "author": "",
@@ -17,6 +17,7 @@
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.30.1",
     "express": "^4.18.3",
+    "express-validator": "^7.0.1",
     "pg": "^8.11.3",
     "postgres": "^3.4.3"
   },
