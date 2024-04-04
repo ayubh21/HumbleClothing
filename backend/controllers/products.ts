@@ -13,7 +13,9 @@ import {
   updateProduct,
 } from "../db/products";
 import { Product } from "../models/models";
+// CRUD
 
+// fetch products
 export const getAllProducts = async (req: Request, res: Response) => {
   try {
     const products = await getProducts();
@@ -23,7 +25,7 @@ export const getAllProducts = async (req: Request, res: Response) => {
     return res.send(400);
   }
 };
-
+// fetch products by Id
 export const getOneProduct = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
@@ -39,6 +41,7 @@ export const getOneProduct = async (req: Request, res: Response) => {
   }
 };
 
+// add product
 export const createProduct = async (req: Request, res: Response) => {
   const { body } = req;
 
@@ -57,8 +60,8 @@ export const createProduct = async (req: Request, res: Response) => {
     return res.send(400);
   }
 };
-
-export const modifyProduct = async (req: Request, res: Response) => {
+// edit Product
+export const editProduct = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
     const { body } = req;

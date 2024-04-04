@@ -7,3 +7,14 @@ export type Product = {
   inventoryId?: number;
   productImage: string;
 };
+
+export type Category = {
+  id: number;
+  name: string;
+  categoryDescription: string;
+};
+
+export type editC = {
+  categoryDescription: string;
+  name: string;
+};

@@ -1,12 +1,19 @@
 import express, { Express } from "express";
 import {
   createProduct,
+  editProduct,
   getAllProducts,
   getOneProduct,
-  modifyProduct,
 } from "../controllers/products";
+import {
+  createCategory,
+  getAllCategories,
+  getCategorybyId,
+  updateCategory,
+} from "../controllers/category";
 import dotenv from "dotenv";
 import { check } from "express-validator";
+import { updateProduct } from "../db/products";
 const app: Express = express();
 dotenv.config();
 
@@ -14,6 +21,11 @@ const port = process.env.PORT;
 app.use(express.json());
 app.get("/products", getAllProducts);
 app.get("/products/:id", getOneProduct);
+app.get("/categories", getAllCategories);
+app.get("/categories/:id", getCategorybyId);
+app.post("/categories", createCategory);
+app.put("/categories/:id", updateCategory);
+
 app.post(
   "/products",
   [
@@ -33,5 +45,5 @@ app.post(
   createProduct,
 );
 
-app.put("/products/:id", modifyProduct);
+app.put("/products/:id", editProduct);
 app.listen(port, () => console.log(`server is listening on ${port}`));
