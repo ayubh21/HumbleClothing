@@ -48,7 +48,9 @@ export const editCategory = async (id: number, c: editC) => {
         categoryDescription: c.categoryDescription,
         name: c.name,
       })
-      .where(eq(category.categoryId, id));
+      .where(eq(category.categoryId, id))
+      .returning(); //returns back the value
+    console.log(updatedRow);
     return updatedRow;
   } catch (err) {
     console.log(err);

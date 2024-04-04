@@ -25,10 +25,10 @@ export const createCategory = async (req: Request, res: Response) => {
   }
 };
 
-export const getAllCategories = async (res: Response) => {
+export const getAllCategories = async (_: Request, res: Response) => {
   try {
     const c = await getCategories();
-    return res.status(200).json(c);
+    res.json(c);
   } catch (err) {
     console.log(err);
     return res.sendStatus(400);
@@ -55,16 +55,17 @@ export const updateCategory = async (req: Request, res: Response) => {
   try {
     const { body } = req;
     const id = parseInt(req.params.id);
+    const record = await getCategory(id);
+
+    if (record == null) {
+      return res.sendStatus(400);
+    }
     const c: editC = {
       categoryDescription: body.categoryDescription,
       name: body.name,
     };
     const category = await editCategory(id, c);
-    if (isEmpty(req.body)) {
-      console.log("failed to edit category");
-    } else {
-      res.json(category);
-    }
+    res.send(category);
   } catch (err) {
     console.log(err);
     return res.send(400);
