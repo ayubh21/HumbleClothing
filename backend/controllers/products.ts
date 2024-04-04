@@ -29,7 +29,7 @@ export const createProduct = async (req: Request, res: Response) => {
       productImage: body.productImage,
       price: body.price,
       categoryId: body.categoryId,
-      inventoryId: body.InventoryId,
+      inventoryId: body.inventoryId,
     };
     // console.log(p);
     await addProduct(p);

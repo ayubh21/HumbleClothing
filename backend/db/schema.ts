@@ -33,7 +33,7 @@ export const products = pgTable("products", {
   price: numeric("price", { precision: 4, scale: 2 }).notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   categoryId: integer("category_id").references(() => category.categoryId),
-  inventoryId: serial("inventory_id").references(() => inventory.inventoryId),
+  inventoryId: integer("inventory_id").references(() => inventory.inventoryId),
   productImage: varchar("product_image"),
 });
 
