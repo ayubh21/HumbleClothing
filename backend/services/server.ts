@@ -1,5 +1,9 @@
 import express, { Express } from "express";
-import { createProduct, getAllProducts } from "../controllers/products";
+import {
+  createProduct,
+  getAllProducts,
+  modifyProduct,
+} from "../controllers/products";
 import dotenv from "dotenv";
 import { check } from "express-validator";
 const app: Express = express();
@@ -27,4 +31,5 @@ app.post(
   createProduct,
 );
 
+app.put("/products/:id", modifyProduct);
 app.listen(port, () => console.log(`server is listening on ${port}`));
