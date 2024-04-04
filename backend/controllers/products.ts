@@ -6,7 +6,12 @@
 // import { eq, exists, sql } from "drizzle-orm";
 
 import { Request, Response } from "express";
-import { addProduct, getProducts, updateProduct } from "../db/products";
+import {
+  addProduct,
+  getProductbyId,
+  getProducts,
+  updateProduct,
+} from "../db/products";
 import { Product } from "../models/models";
 
 export const getAllProducts = async (req: Request, res: Response) => {
@@ -16,6 +21,21 @@ export const getAllProducts = async (req: Request, res: Response) => {
   } catch (error) {
     console.log(error);
     return res.send(400);
+  }
+};
+
+export const getOneProduct = async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    const p = await getProductbyId(id);
+    if (res.statusCode !== 200) {
+      console.log("error in fetching product");
+    } else {
+      res.json(p);
+    }
+  } catch (err) {
+    console.log(err);
+    return res.sendStatus(400);
   }
 };
 

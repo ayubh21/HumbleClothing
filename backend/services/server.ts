@@ -2,6 +2,7 @@ import express, { Express } from "express";
 import {
   createProduct,
   getAllProducts,
+  getOneProduct,
   modifyProduct,
 } from "../controllers/products";
 import dotenv from "dotenv";
@@ -12,6 +13,7 @@ dotenv.config();
 const port = process.env.PORT;
 app.use(express.json());
 app.get("/products", getAllProducts);
+app.get("/products/:id", getOneProduct);
 app.post(
   "/products",
   [
