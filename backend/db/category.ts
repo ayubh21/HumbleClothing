@@ -34,6 +34,7 @@ export const getCategory = async (id: number) => {
     const row = await db.query.category.findFirst({
       where: eq(category.categoryId, id),
     });
+
     return row;
   } catch (err) {
     console.log(err);
@@ -52,6 +53,17 @@ export const editCategory = async (id: number, c: editC) => {
       .returning(); //returns back the value
     console.log(updatedRow);
     return updatedRow;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deleteCategory = async (id: number) => {
+  try {
+    const c = await getCategory(id);
+    if (c != undefined) {
+      await db.delete(category).where(eq(category.categoryId, id));
+    }
   } catch (err) {
     console.log(err);
   }

@@ -13,7 +13,8 @@ import {
 } from "../controllers/category";
 import dotenv from "dotenv";
 import { check } from "express-validator";
-import { updateProduct } from "../db/products";
+import { deleteProduct } from "../db/products";
+import { deleteCategory } from "../db/category";
 const app: Express = express();
 dotenv.config();
 
@@ -21,11 +22,13 @@ const port = process.env.PORT;
 app.use(express.json());
 app.get("/products", getAllProducts);
 app.get("/products/:id", getOneProduct);
+app.delete("/products/:id", deleteProduct);
 app.get("/categories", getAllCategories);
 app.get("/categories/:id", getCategorybyId);
 app.post("/categories", createCategory);
-app.put("/categories/:id", updateCategory);
+app.delete("/categories/:id", deleteCategory);
 
+app.put("/categories/:id", updateCategory);
 app.post(
   "/products",
   [

@@ -16,7 +16,7 @@ import { Product } from "../models/models";
 // CRUD
 
 // fetch products
-export const getAllProducts = async (req: Request, res: Response) => {
+export const getAllProducts = async (_: Request, res: Response) => {
   try {
     const products = await getProducts();
     return res.status(200).json(products);

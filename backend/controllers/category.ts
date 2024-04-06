@@ -39,8 +39,8 @@ export const getCategorybyId = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
     const c = await getCategory(id);
-
-    if (isEmpty(req.body)) {
+    console.log(c);
+    if (c == undefined) {
       return res.send(400);
     } else {
       res.json(c);
