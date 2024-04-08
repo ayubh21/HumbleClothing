@@ -58,12 +58,10 @@ export const editCategory = async (id: number, c: editC) => {
   }
 };
 
-export const deleteCategory = async (id: number) => {
+export const deleteC = async (id: number) => {
   try {
-    const c = await getCategory(id);
-    if (c != undefined) {
-      await db.delete(category).where(eq(category.categoryId, id));
-    }
+    await getCategory(id);
+    await db.delete(category).where(eq(category.categoryId, id));
   } catch (err) {
     console.log(err);
   }

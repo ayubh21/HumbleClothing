@@ -58,7 +58,7 @@ export const updateProduct = async (id: number, product: Product) => {
   return updatedRow;
 };
 
-export async function deleteProduct(id: number) {
+export async function deleteP(id: number) {
   try {
     await db.delete(products).where(eq(products.product_id, id));
   } catch (err) {

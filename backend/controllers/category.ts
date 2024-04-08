@@ -2,13 +2,13 @@
 
 import {
   addCategory,
+  deleteC,
   editCategory,
   getCategories,
   getCategory,
 } from "../db/category";
 import { Request, Response } from "express";
 import { Category, editC } from "../models/models";
-import { isEmpty } from "lodash";
 export const createCategory = async (req: Request, res: Response) => {
   try {
     const { body } = req;
@@ -39,12 +39,10 @@ export const getCategorybyId = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
     const c = await getCategory(id);
-    console.log(c);
     if (c == undefined) {
-      return res.send(400);
-    } else {
-      res.json(c);
+      return res.sendStatus(404);
     }
+    res.json(c);
   } catch (err) {
     console.log(err);
     return res.sendStatus(400);
@@ -66,6 +64,25 @@ export const updateCategory = async (req: Request, res: Response) => {
     };
     const category = await editCategory(id, c);
     res.send(category);
+  } catch (err) {
+    console.log(err);
+    return res.send(400);
+  }
+};
+
+export const deleteCategory = async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    const d = await deleteC(id);
+    console.log(d);
+    if (d != undefined) {
+      console.log(`category with id ${id} failed to delete!`);
+      return res.sendStatus(404);
+    } else {
+      res.send(d);
+      console.log(`category with id ${id} has successfully been deleted!`);
+    }
+    res.json(d);
   } catch (err) {
     console.log(err);
     return res.send(400);

@@ -1,5 +1,5 @@
 // Products
-
+//
 // import { db } from "../db/database";
 // import { products } from "../db/schema";
 // import { Product } from "../models/models";
@@ -8,11 +8,13 @@
 import { Request, Response } from "express";
 import {
   addProduct,
+  deleteP,
   getProductbyId,
   getProducts,
   updateProduct,
 } from "../db/products";
 import { Product } from "../models/models";
+import { parseInt } from "lodash";
 // CRUD
 
 // fetch products
@@ -30,14 +32,16 @@ export const getOneProduct = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
     const p = await getProductbyId(id);
-    if (res.statusCode !== 200) {
-      console.log("error in fetching product");
+
+    if (p == undefined) {
+      return res.sendStatus(404);
     } else {
       res.json(p);
+      res.json(p);
+      return res.sendStatus(200);
     }
   } catch (err) {
     console.log(err);
-    return res.sendStatus(400);
   }
 };
 
@@ -77,5 +81,21 @@ export const editProduct = async (req: Request, res: Response) => {
   } catch (err) {
     console.log(err);
     return res.send(400);
+  }
+};
+
+export const deleteProduct = async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    const d = await deleteP(id);
+
+    if (d != undefined) {
+      return res.sendStatus(404);
+    } else {
+      console.log(`product with id ${id} has been successfully deleted`);
+      return res.sendStatus(200);
+    }
+  } catch (err) {
+    console.log(err);
   }
 };
