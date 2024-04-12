@@ -18,3 +18,7 @@ export type editC = {
   categoryDescription: string;
   name: string;
 };
+
+export type Order = {
+  // need to do
+};

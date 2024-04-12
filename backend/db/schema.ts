@@ -1,4 +1,4 @@
-import { int } from "drizzle-orm/mysql-core";
+import { InferInsertModel, InferModel, InferSelectModel } from "drizzle-orm";
 import {
   date,
   serial,
@@ -7,22 +7,18 @@ import {
   pgTable,
   uuid,
   numeric,
-  char,
   varchar,
   integer,
 } from "drizzle-orm/pg-core";
 
-// customer
-export const customer = pgTable("user", {
-  customerId: serial("customer_id").primaryKey().notNull(),
-  firstName: varchar("firstName", { length: 20 }).notNull(),
-  lastName: varchar("lastName", { length: 20 }),
-  email: varchar("email", { length: 25 }).notNull(),
-  age: integer("age"),
-  city: text("city").notNull(),
-  address: varchar("address").notNull(),
-  postalCode: char("postal_code", { length: 6 }).notNull(),
-  createdAt: timestamp("created_at").notNull(),
+// users
+export const users = pgTable("users", {
+  id: serial("id").primaryKey().notNull(),
+  username: text("username").notNull(),
+  email: text("email").notNull(),
+  password: text("password").notNull(),
+  salt: text("salt"),
+  sessionToken: text("sessionToken"),
 });
 
 //Products
