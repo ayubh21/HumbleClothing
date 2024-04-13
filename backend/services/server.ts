@@ -3,6 +3,7 @@ import chalk from "chalk";
 import dotenv from "dotenv";
 import productRoute from "../routes/products";
 import categoryRoute from "../routes/category";
+import registerRoute from "../routes/auth-route";
 const app: Express = express();
 dotenv.config();
 
@@ -20,4 +21,5 @@ log(chalk.gray("                                                     "));
 
 app.use("/products", productRoute);
 app.use("/categories", categoryRoute);
+app.use("/auth/register", registerRoute);
 app.listen(port, () => console.log(`server is listening on ${port}`));

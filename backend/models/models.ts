@@ -19,6 +19,10 @@ export type editC = {
   name: string;
 };
 
-export type Order = {
-  // need to do
+export type User = {
+  username: string;
+  email: string;
+  password: string;
+  salt: string;
+  sessionToken?: string;
 };
