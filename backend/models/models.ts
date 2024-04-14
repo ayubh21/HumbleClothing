@@ -23,6 +23,6 @@ export type User = {
   username: string;
   email: string;
   password: string;
-  salt: string;
+  salt?: string;
   sessionToken?: string;
 };

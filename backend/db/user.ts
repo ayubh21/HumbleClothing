@@ -5,20 +5,25 @@ import { User } from "../models/models";
 
 export const createUser = async (user: User) => {
   try {
-    await db.insert(users).values(user).returning();
+    await db.insert(users).values({
+      password: user.password,
+      username: user.username,
+      email: user.email,
+    });
   } catch (err) {
     console.log(err);
   }
 };
 export const getUsers = async () => {
   try {
-    await db.query.users.findMany({
+    const data = await db.query.users.findMany({
       columns: {
-        id: true,
+        userid: true,
         username: true,
         email: true,
       },
     });
+    return data;
   } catch (err) {
     console.log(err);
   }
@@ -33,10 +38,10 @@ export const getUserbyEmail = async (email: string) => {
   }
 };
 
-export const getUserbyId = async (id: number) => {
+export const getUserbyId = async (id: string) => {
   try {
     await db.query.users.findFirst({
-      where: eq(users.id, id),
+      where: eq(users.userid, id),
     });
   } catch (err) {
     console.log(err);
@@ -53,9 +58,9 @@ export const getUserByToken = async (session: string) => {
   }
 };
 
-export const editUserbyId = async (id: number, updatedUser: User) => {
+export const editUserbyId = async (id: string, updatedUser: User) => {
   try {
-    await db.update(users).set(updatedUser).where(eq(users.id, id));
+    await db.update(users).set(updatedUser).where(eq(users.userid, id));
   } catch (err) {
     console.log(err);
   }

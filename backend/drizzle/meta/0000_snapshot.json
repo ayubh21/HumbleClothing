@@ -1,5 +1,5 @@
 {
-  "id": "86558173-72c3-4cb8-a5b7-50963b683c98",
+  "id": "8242749e-8efe-4505-a4d6-0a9f8b3ebb25",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -395,11 +395,12 @@
       "name": "users",
       "schema": "",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
+        "userid": {
+          "name": "userid",
+          "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "username": {
           "name": "username",
