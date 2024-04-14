@@ -2,6 +2,8 @@
 import { Request, Response } from "express";
 import { createUser, getUserbyEmail } from "../db/user";
 import { auth, random } from "../utils/utils";
+// import { users } from "../db/schema";
+// import express from "express";
 
 export const register = async (req: Request, res: Response) => {
   try {
@@ -35,3 +37,12 @@ export const register = async (req: Request, res: Response) => {
     return res.sendStatus(400);
   }
 };
+
+//
+// export const handleGetUserSession = async (req: Request, res: Response) => {
+//   try {
+//
+//   } catch () {
+//
+//   }
+// }

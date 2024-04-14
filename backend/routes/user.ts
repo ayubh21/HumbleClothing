@@ -1,12 +1,20 @@
 import express from "express";
-import { addUser, getAllUser } from "../controllers/user";
+import {
+  handleGetAllUser,
+  handleDeleteUser,
+  handleGetUserbyId,
+  handleAddUser,
+  handleUpdateUser,
+  handleGetUserbyEmail,
+} from "../controllers/user";
 
 const router = express.Router();
 
-router.get("/", getAllUser);
-// router.get("/", getUserbyId);
-// router.get("/", getUserbyEmail);
-// router.get("/", getUserByToken);
-router.post("/", addUser);
+router.get("/", handleGetAllUser);
+router.get("/:id", handleGetUserbyId);
+router.get("/:email", handleGetUserbyEmail);
+router.put("/:id", handleUpdateUser);
+router.delete("/:id", handleDeleteUser);
+router.post("/", handleAddUser);
 
 export default router;

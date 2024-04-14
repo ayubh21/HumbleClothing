@@ -37,7 +37,6 @@ export const getOneProduct = async (req: Request, res: Response) => {
       return res.sendStatus(404);
     } else {
       res.json(p);
-      res.json(p);
       return res.sendStatus(200);
     }
   } catch (err) {

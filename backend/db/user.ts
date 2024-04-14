@@ -40,9 +40,10 @@ export const getUserbyEmail = async (email: string) => {
 
 export const getUserbyId = async (id: string) => {
   try {
-    await db.query.users.findFirst({
+    const user = await db.query.users.findFirst({
       where: eq(users.userid, id),
     });
+    return user;
   } catch (err) {
     console.log(err);
   }
@@ -58,9 +59,17 @@ export const getUserByToken = async (session: string) => {
   }
 };
 
-export const editUserbyId = async (id: string, updatedUser: User) => {
+export const editUser = async (id: string, updatedUser: User) => {
   try {
     await db.update(users).set(updatedUser).where(eq(users.userid, id));
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deleteUser = async (id: string) => {
+  try {
+    await db.delete(users).where(eq(users.userid, id));
   } catch (err) {
     console.log(err);
   }
