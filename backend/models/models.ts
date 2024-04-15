@@ -20,9 +20,10 @@ export type editC = {
 };
 
 export type User = {
+  userid?: string;
   username: string;
   email: string;
   password: string;
-  salt?: string;
-  sessionToken?: string;
+  salt?: string | null;
+  sessionToken?: string | null;
 };

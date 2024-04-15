@@ -9,6 +9,7 @@ export const createUser = async (user: User) => {
       password: user.password,
       username: user.username,
       email: user.email,
+      salt: user.salt,
     });
   } catch (err) {
     console.log(err);
@@ -51,9 +52,11 @@ export const getUserbyId = async (id: string) => {
 
 export const getUserByToken = async (session: string) => {
   try {
-    await db.query.users.findFirst({
-      where: eq(users.sessionToken, session),
-    });
+    const token = await db
+      .select()
+      .from(users)
+      .where(eq(users.sessionToken, session));
+    return token;
   } catch (err) {
     console.log(err);
   }

@@ -2,7 +2,7 @@
 import crypto from "crypto";
 import dotenv from "dotenv";
 dotenv.config();
-export const auth = (salt: string, password: string): string => {
+export const auth = (salt: string | null, password: string): string => {
   return crypto
     .createHmac("sha256", [salt, password].join("-"))
     .update(process.env.SECRET as string)

@@ -1,4 +1,5 @@
 import express from "express";
+import { isAuthenticated } from "../middleware/middleware";
 import {
   handleGetAllUser,
   handleDeleteUser,
@@ -10,7 +11,7 @@ import {
 
 const router = express.Router();
 
-router.get("/", handleGetAllUser);
+router.get("/", isAuthenticated, handleGetAllUser);
 router.get("/:id", handleGetUserbyId);
 router.get("/:email", handleGetUserbyEmail);
 router.put("/:id", handleUpdateUser);
