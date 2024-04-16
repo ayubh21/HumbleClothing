@@ -1,5 +1,5 @@
 {
-  "id": "8242749e-8efe-4505-a4d6-0a9f8b3ebb25",
+  "id": "7e0de17d-8c0d-4e12-8be2-814b464d7899",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -23,6 +23,12 @@
         "quanitity": {
           "name": "quanitity",
           "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sessionId": {
+          "name": "sessionId",
+          "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
@@ -80,41 +86,6 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "inventory": {
-      "name": "inventory",
-      "schema": "",
-      "columns": {
-        "inventory_id": {
-          "name": "inventory_id",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "quantity": {
-          "name": "quantity",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": false,
-          "default": "now()"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": false
         }
       },
       "indexes": {},
@@ -225,6 +196,12 @@
       "name": "order_details",
       "schema": "",
       "columns": {
+        "userid": {
+          "name": "userid",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
         "order_detail_id": {
           "name": "order_detail_id",
           "type": "integer",
@@ -346,12 +323,6 @@
           "primaryKey": false,
           "notNull": false
         },
-        "inventory_id": {
-          "name": "inventory_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
         "product_image": {
           "name": "product_image",
           "type": "varchar",
@@ -373,21 +344,49 @@
           ],
           "onDelete": "no action",
           "onUpdate": "no action"
-        },
-        "products_inventory_id_inventory_inventory_id_fk": {
-          "name": "products_inventory_id_inventory_inventory_id_fk",
-          "tableFrom": "products",
-          "tableTo": "inventory",
-          "columnsFrom": [
-            "inventory_id"
-          ],
-          "columnsTo": [
-            "inventory_id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
         }
       },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "shopping_detail": {
+      "name": "shopping_detail",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "sessionId": {
+          "name": "sessionId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "quantity": {
+          "name": "quantity",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },

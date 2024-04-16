@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS "cart" (
 	"cart_id" uuid PRIMARY KEY NOT NULL,
 	"product_id" serial NOT NULL,
 	"quanitity" integer NOT NULL,
+	"sessionId" uuid NOT NULL,
 	"created_at" timestamp DEFAULT now(),
 	"updated_at" timestamp
 );
@@ -10,13 +11,6 @@ CREATE TABLE IF NOT EXISTS "category" (
 	"category_id" integer PRIMARY KEY NOT NULL,
 	"name" varchar(10) NOT NULL,
 	"desc" text NOT NULL
-);
---> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "inventory" (
-	"inventory_id" integer PRIMARY KEY NOT NULL,
-	"quantity" integer NOT NULL,
-	"created_at" timestamp DEFAULT now(),
-	"updated_at" timestamp
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "order" (
@@ -33,6 +27,7 @@ CREATE TABLE IF NOT EXISTS "order" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "order_details" (
+	"userid" uuid NOT NULL,
 	"order_detail_id" integer PRIMARY KEY NOT NULL,
 	"total" numeric(100, 20),
 	"payment_id" integer,
@@ -53,8 +48,15 @@ CREATE TABLE IF NOT EXISTS "products" (
 	"price" numeric(4, 2) NOT NULL,
 	"created_at" timestamp DEFAULT now(),
 	"category_id" integer,
-	"inventory_id" integer,
 	"product_image" varchar
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "shopping_detail" (
+	"id" integer PRIMARY KEY NOT NULL,
+	"sessionId" uuid NOT NULL,
+	"quantity" integer NOT NULL,
+	"created_at" timestamp DEFAULT now(),
+	"updated_at" timestamp
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "users" (
@@ -92,12 +94,6 @@ END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "products" ADD CONSTRAINT "products_category_id_category_category_id_fk" FOREIGN KEY ("category_id") REFERENCES "category"("category_id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "products" ADD CONSTRAINT "products_inventory_id_inventory_inventory_id_fk" FOREIGN KEY ("inventory_id") REFERENCES "inventory"("inventory_id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

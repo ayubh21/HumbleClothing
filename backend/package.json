@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node ./src/api/services/server.ts",
-    "generate": "drizzle-kit generate:pg --schema db/schema.ts",
-    "migration-push": "node -r esbuild-register db/migrate.ts"
+    "generate": "drizzle-kit generate:pg --schema ./src/api/db/schema.ts",
+    "migration-push": "node -r esbuild-register ./src/api/db/migrate.ts"
   },
   "author": "",
   "license": "ISC",

@@ -27,3 +27,24 @@ export type User = {
   salt?: string | null;
   sessionToken?: string | null;
 };
+
+export type Order = {
+  quantity: string;
+  productId: number;
+  orderDate: Date;
+  trackingNumber: number;
+  status: string;
+  shippingAddress: string;
+  product: [];
+  shippingCost: number;
+  tax: number;
+  notes?: string;
+};
+
+export type Cart = {
+  cartId: string;
+  product?: [];
+  productId: number;
+  quantity: number;
+  sessionId: string;
+};

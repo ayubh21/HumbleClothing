@@ -1,4 +1,3 @@
-import { InferInsertModel, InferModel, InferSelectModel } from "drizzle-orm";
 import {
   date,
   serial,
@@ -29,7 +28,6 @@ export const products = pgTable("products", {
   price: numeric("price", { precision: 4, scale: 2 }).notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   categoryId: integer("category_id").references(() => category.categoryId),
-  inventoryId: integer("inventory_id").references(() => inventory.inventoryId),
   productImage: varchar("product_image"),
 });
 
@@ -40,14 +38,6 @@ export const category = pgTable("category", {
   categoryDescription: text("desc").notNull(),
 });
 
-//Inventory
-export const inventory = pgTable("inventory", {
-  inventoryId: integer("inventory_id").primaryKey().notNull(),
-  quantity: integer("quantity").notNull(),
-  createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at"),
-});
-
 //cart
 export const cart = pgTable("cart", {
   cartId: uuid("cart_id").primaryKey().notNull(),
@@ -55,6 +45,8 @@ export const cart = pgTable("cart", {
     .references(() => products.product_id)
     .notNull(),
   quantity: integer("quanitity").notNull(),
+  sessionId: uuid("sessionId").notNull(),
+
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at"),
 });
@@ -79,6 +71,7 @@ export const order = pgTable("order", {
 
 //order details
 export const orderDetails = pgTable("order_details", {
+  userid: uuid("userid").notNull(),
   orderDetailsId: integer("order_detail_id").primaryKey().notNull(),
   total: numeric("total", { precision: 100, scale: 20 }),
   paymentId: integer("payment_id").references(() => paymentDetail.paymentId),
@@ -88,6 +81,14 @@ export const orderDetails = pgTable("order_details", {
 
 export const paymentDetail = pgTable("payment_detail", {
   paymentId: integer("payment_id").primaryKey().notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at"),
+});
+
+export const shoppping_session = pgTable("shopping_detail", {
+  id: integer("id").primaryKey().notNull(),
+  sessionId: uuid("sessionId").notNull(),
+  quantity: integer("quantity").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at"),
 });
