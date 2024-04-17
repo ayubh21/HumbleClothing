@@ -1,5 +1,6 @@
 export type Product = {
-  product?: [];
+  // product?: [];
+  productId?: number;
   productDescription: string;
   sku: string;
   price: number;
@@ -43,8 +44,7 @@ export type Order = {
 
 export type Cart = {
   cartId: string;
-  product?: [];
-  productId: number;
   quantity: number;
   sessionId: string;
+  product: Product[];
 };

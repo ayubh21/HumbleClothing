@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node ./src/api/services/server.ts",
+    "start": "ts-node ./src/api/db/cart.ts",
     "generate": "drizzle-kit generate:pg --schema ./src/api/db/schema.ts",
     "migration-push": "node -r esbuild-register ./src/api/db/migrate.ts"
   },
