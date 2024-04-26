@@ -8,6 +8,7 @@ import {
   numeric,
   varchar,
   integer,
+  primaryKey,
 } from "drizzle-orm/pg-core";
 
 // users
@@ -92,3 +93,21 @@ export const shoppping_session = pgTable("shopping_detail", {
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at"),
 });
+
+export const cart_product = pgTable(
+  "cart_product",
+  {
+    cartId: uuid("cart_id")
+      .notNull()
+      .references(() => cart.cartId),
+
+    productId: integer("product_id")
+      .notNull()
+      .references(() => products.product_id),
+  },
+  (t) => {
+    return {
+      pk: primaryKey({ columns: [t.cartId, t.productId] }),
+    };
+  },
+);

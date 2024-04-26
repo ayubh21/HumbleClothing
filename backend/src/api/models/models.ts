@@ -1,5 +1,4 @@
 export type Product = {
-  // product?: [];
   productId?: number;
   productDescription: string;
   sku: string;
@@ -46,5 +45,6 @@ export type Cart = {
   cartId: string;
   quantity: number;
   sessionId: string;
-  product: Product[];
+  product: [];
+  productId: number;
 };

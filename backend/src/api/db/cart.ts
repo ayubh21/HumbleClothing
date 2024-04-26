@@ -1,8 +1,9 @@
 // cart
 import { db } from "./database";
 import { cart, products } from "./schema";
-import { Cart } from "../models/models";
 import { eq } from "drizzle-orm";
+import { Cart, Product } from "../models/models";
+import { getProducts } from "./products";
 export const buildCart = async () => {
   try {
     // const bin: (typeof temp)[] = [];
@@ -21,19 +22,37 @@ export const buildCart = async () => {
       })
       .from(cart)
       .innerJoin(products, eq(products.product_id, cart.productId));
+    console.log(tempCart);
     return tempCart;
   } catch (err) {
     console.log(err);
   }
 };
 
-buildCart();
+// adding to cart and inserting into the database.
+export const InsertCart = async (temp: Cart) => {
+  try {
+    const prodObj = await getProducts();
 
-// export const addToCart = async () => {
-//   try {
-//
-//
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
+    const cartObj = await db
+      .insert(cart)
+      .values({
+        cartId: temp.cartId,
+        quantity: temp.quantity,
+        sessionId: temp.sessionId,
+        productId: temp.productId,
+        product: [
+          {
+            productId: prodObj.product_id,
+            productDescription: prodObj.productDescription,
+            price: products.price,
+            productImage: products.productImage,
+            sku: products.sku,
+          },
+        ],
+      })
+      .returning();
+  } catch (err) {
+    console.log(err);
+  }
+};
